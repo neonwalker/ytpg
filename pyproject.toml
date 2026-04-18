@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ytpg"
+version = "0.1.0"
+description = "YouTube as a Postgres Database"
+requires-python = ">=3.11"
+dependencies = [
+    "sqlglot>=25.0",
+    "webvtt-py>=0.5",
+    "google-api-python-client>=2.120",
+    "google-auth-oauthlib>=1.2",
+    "google-auth-httplib2>=0.2",
+    "opencv-python>=4.9",
+    "qrcode[pil]>=7.4",
+    "click>=8.1",
+    "opentelemetry-sdk>=1.24",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.24",
+]
+
+[project.scripts]
+ytpg = "ytpg.cli:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ytpg*"]
+
+[tool.pytest.ini_options]
+markers = ["integration: requires real YouTube API credentials"]
+addopts = "-m 'not integration'"
